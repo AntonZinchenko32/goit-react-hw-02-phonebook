@@ -1,0 +1,15 @@
+.form {
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px;
+
+    border:1px solid black
+}
+
+.inputStyled {
+    margin: 25px 0;
+
+    width: 270px;
+    height: 20px;
+}
