@@ -8,8 +8,8 @@ const Contacts = ({contacts}) => {
     
     return (
         <ul className={css.contactsList}>
-            {contacts.map(({ name, id }) => (
-                <li key={id}>{name}</li>
+            {contacts.map(({ name, id, number }) => (
+                <li key={id}>{name}: {number}</li>
             ))}
         </ul>
     )

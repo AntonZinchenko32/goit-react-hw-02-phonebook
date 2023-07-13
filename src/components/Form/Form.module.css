@@ -8,8 +8,20 @@
 }
 
 .inputStyled {
-    margin: 25px 0;
+    margin: 15px 0;
 
     width: 270px;
-    height: 20px;
+    height: 28px;
+
+    font-size: large;
+}
+
+.submitButton {
+    margin-top: 20px;
+
+    height: 30px;
+    width: 150px;
+
+    font-size: large;
+    font-weight: 700;
 }
