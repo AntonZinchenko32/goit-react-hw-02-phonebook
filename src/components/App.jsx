@@ -19,7 +19,7 @@ export class App extends Component {
     // Зберігаємо дані з інпуту у стан компонента
     this.setState({name: form.elements.name.value})
     
-    
+    // Асинхронно додаэмо новий контакт до масиву контактів в стані додатку
     this.setState(state => ({
     contacts: state.contacts.concat({id:nanoid(), name: state.name}),
   }));
