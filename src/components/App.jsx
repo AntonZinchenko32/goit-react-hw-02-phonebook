@@ -14,17 +14,17 @@ export class App extends Component {
   
   handleSubmit = evt => {
     evt.preventDefault();
-    
     const form = evt.currentTarget;
-    const name = form.elements.name.value;
     
-    const contact = {id: nanoid(), name: name}
-    console.log(contact);
-    // this.state.contacts.push(contact)
+    // Зберігаємо дані з інпуту у стан компонента
+    this.setState({name: form.elements.name.value})
+    
+    
+    this.setState(state => ({
+    contacts: state.contacts.concat({id:nanoid(), name: state.name}),
+  }));
 
-    this.setState(state => ({ contacts: state.contacts.push(contact) }))
-    
-    
+  
     form.reset();
   };
 
@@ -35,7 +35,7 @@ export class App extends Component {
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'start',
         alignItems: 'center',
         fontSize: 40,
         color: '#010101'
