@@ -31,7 +31,7 @@ export class App extends Component {
     // Асинхронно додаэмо новий контакт до масиву контактів в стані додатку
     this.setState(state => ({
     contacts: state.contacts.concat({ id:nanoid(), name: state.name, number: state.number }),
-  }));
+    }));
 
     
     form.reset();
@@ -40,12 +40,13 @@ export class App extends Component {
   render() {
     return (
     <div
-      style={{
+        style={{
+        margin: '15px',
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'start',
-        alignItems: 'center',
+        alignItems: 'start',
         fontSize: 40,
         color: '#010101'
       }}

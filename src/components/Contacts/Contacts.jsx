@@ -7,11 +7,18 @@ import PropTypes from "prop-types"
 const Contacts = ({contacts}) => {
     
     return (
-        <ul className={css.contactsList}>
-            {contacts.map(({ name, id, number }) => (
-                <li key={id}>{name}: {number}</li>
-            ))}
-        </ul>
+        <>  
+            <span className={css.label}>Find contacts by name</span>
+            <input
+                className={css.input}
+                // onChange={ }
+            />
+            <ul className={css.contactsList}>
+                {contacts.map(({ name, id, number }) => (
+                    <li key={id}>{name}: {number}</li>
+                ))}
+            </ul>
+        </>
     )
 }
 
