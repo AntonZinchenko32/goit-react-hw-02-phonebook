@@ -5,6 +5,7 @@ import Section from './Section/Section'
 import Form from './Form/Form'
 import Contacts from './Contacts/Contacts'
 
+
 export class App extends Component {
 
   state = {
@@ -41,26 +42,14 @@ export class App extends Component {
   // Функція-обробник змін в інпуті пошуку контактів за іменем
   handleChange = evt => {
     this.setState({ filter: evt.target.value });
+    
+    
 
-
-
-    // Пошук
-    const source = this.state.contacts.map(contact => (contact.name.toLowerCase()));
-    console.log(source);
-    const target = this.state.filter.toLowerCase();
-    console.log(target);
-    const isSearchSucceed = source.includes(target);
-    const isInputNotEmpty = this.state.filter.trim().length !== 0;
-    console.log(isSearchSucceed, isInputNotEmpty);
-
-
-
-    if (isInputNotEmpty && isSearchSucceed) {
-      this.setState(state => ({
+    this.setState(state => ({
         contacts: state.contacts.filter(contact =>
           contact.name.toLowerCase().includes(state.filter.toLowerCase()))
     }));
-    }
+    
   }
 
   render() {
@@ -81,15 +70,11 @@ export class App extends Component {
           <Section title="Phonebook" />
           <Form addContactFunc={this.handleSubmit} />
         </>
-        {this.state.contacts.length != 0 &&
-          <>
-            <Section title="Contacts" />
-            <Contacts
+        <Section title="Contacts" />
+        <Contacts
               contacts={this.state.contacts}
               searchContactFunc= {this.handleChange}
             />
-          </>
-        }
     </div>
   );
   }
