@@ -15,10 +15,11 @@ export class App extends Component {
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'}
     ],
     name: '',
-    number: ''
+    number: '',
+    filter: ''
   }
   
-  // Функція-обробщик сабміту
+  // Функція-обробник сабміту
   handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
@@ -36,6 +37,31 @@ export class App extends Component {
     
     form.reset();
   };
+
+  // Функція-обробник змін в інпуті пошуку контактів за іменем
+  handleChange = evt => {
+    this.setState({ filter: evt.target.value });
+
+
+    
+    // Пошук
+    const source = this.state.contacts.map(contact => (contact.name.toLowerCase()));
+    console.log(source);
+    const target = this.state.filter.toLowerCase();
+    console.log(target);
+    const isSearchSucceed = source.includes(target);
+    const isInputNotEmpty = this.state.filter.trim().length !== 0;
+    console.log(isSearchSucceed, isInputNotEmpty);
+
+
+
+    if (isInputNotEmpty && isSearchSucceed) {
+      this.setState(state => ({
+        contacts: state.contacts.filter(contact =>
+          contact.name.toLowerCase().includes(state.filter.toLowerCase()))
+    }));
+    }
+  }
 
   render() {
     return (
@@ -57,8 +83,11 @@ export class App extends Component {
         </>
         {this.state.contacts.length != 0 &&
           <>
-          <Section title="Contacts" />
-          <Contacts contacts={this.state.contacts} />
+            <Section title="Contacts" />
+            <Contacts
+              contacts={this.state.contacts}
+              searchContactFunc= {this.handleChange}
+            />
           </>
         }
     </div>
