@@ -43,7 +43,7 @@ export class App extends Component {
     this.setState({ filter: evt.target.value });
 
 
-    
+
     // Пошук
     const source = this.state.contacts.map(contact => (contact.name.toLowerCase()));
     console.log(source);
