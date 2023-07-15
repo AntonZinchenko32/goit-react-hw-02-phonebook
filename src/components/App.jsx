@@ -30,7 +30,7 @@ export class App extends Component {
     // Асинхронно додаэмо новий контакт до масиву контактів в стані додатку
     this.setState(({contacts, name, number}) => ({
       contacts: contacts.concat({
-        id: nanoid(), name: name, number: number
+        id: nanoid(), name, number
       }),
     }));
 
