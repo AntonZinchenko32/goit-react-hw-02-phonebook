@@ -24,8 +24,8 @@ export class App extends Component {
     
     // Зберігаємо дані з інпутів у стан компонента
     const { name, number } = form.elements;
-    this.setState({ name: name.value })
-    this.setState({ number: number.value} )
+    this.setState({ name: name.value, number: number.value })
+    
     
     // Асинхронно додаэмо новий контакт до масиву контактів в стані додатку
     this.setState(({contacts, name, number}) => ({
@@ -45,22 +45,20 @@ export class App extends Component {
   // Функція фільтрації контактів
   contactFiltering = () => {
 
-    if (this.state.filter === '') return this.state.contacts
+    const { filter, contacts } = this.state;
+
+    if (filter === '') return contacts;
     
     else {
 
-      const filter = this.state.filter;
-      const basicContacts = this.state.contacts;
-      let filtredContacts;
-
-      filtredContacts = basicContacts.filter(contact =>
+      const filtredContacts = contacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
       )
       if (filtredContacts !== []) {
         return filtredContacts;
       }
       else {
-        return basicContacts;
+        return contacts;
       }
     }
   }
