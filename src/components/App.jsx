@@ -17,7 +17,9 @@ export class App extends Component {
   
   // Функція-обробник сабміту
   handleSubmit = evt => {
+    
     evt.preventDefault();
+    
     const form = evt.currentTarget;
     
     // Зберігаємо дані з інпутів у стан компонента
@@ -26,11 +28,12 @@ export class App extends Component {
     this.setState({ number: number.value} )
     
     // Асинхронно додаэмо новий контакт до масиву контактів в стані додатку
-    this.setState(state => ({
-    contacts: state.contacts.concat({ id:nanoid(), name: state.name, number: state.number }),
+    this.setState(({contacts, name, number}) => ({
+      contacts: contacts.concat({
+        id: nanoid(), name: name, number: number
+      }),
     }));
 
-    
     form.reset();
   };
 
@@ -42,14 +45,14 @@ export class App extends Component {
   // Функція фільтрації контактів
   contactFiltering = () => {
 
-    const filter = this.state.filter;
-    const basicContacts = this.state.contacts;
-    let filtredContacts;
-
-    if (filter === '') {
-      return basicContacts;
-    }
+    if (this.state.filter === '') return this.state.contacts
+    
     else {
+
+      const filter = this.state.filter;
+      const basicContacts = this.state.contacts;
+      let filtredContacts;
+
       filtredContacts = basicContacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
       )
