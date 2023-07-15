@@ -20,7 +20,7 @@ const Contacts = ({contacts, searchContactFunc}) => {
                 ))}
                 </ul>
                 :
-                <Notification message="No contacts was find, Sorry" />
+                <Notification message="There are no contacts forsuch a request, sorry" />
             }
             
         </>

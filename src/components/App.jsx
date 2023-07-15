@@ -39,20 +39,39 @@ export class App extends Component {
     form.reset();
   };
 
-  // Функція-обробник змін в інпуті пошуку контактів за іменем
+  // Функція що передає дані з інпуту до стану компонента
   handleChange = evt => {
     this.setState({ filter: evt.target.value });
-    
-    
-
-    this.setState(state => ({
-        contacts: state.contacts.filter(contact =>
-          contact.name.toLowerCase().includes(state.filter.toLowerCase()))
-    }));
-    
   }
 
+  // Функція фільтрації контактів
+  contactFiltering = () => {
+
+    const filter = this.state.filter;
+    const basicContacts = this.state.contacts;
+    let filtredContacts;
+
+    if (filter === '') {
+      return basicContacts;
+    }
+    else {
+      filtredContacts = basicContacts.filter(contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase())
+      )
+      if (filtredContacts !== []) {
+        return filtredContacts;
+      }
+      else {
+        return basicContacts;
+      }
+    }
+  }
+    
+  
   render() {
+
+    const { handleSubmit, handleChange, contactFiltering } = this;
+
     return (
     <div
         style={{
@@ -68,12 +87,12 @@ export class App extends Component {
     >
         <>
           <Section title="Phonebook" />
-          <Form addContactFunc={this.handleSubmit} />
+          <Form addContactFunc={handleSubmit} />
         </>
         <Section title="Contacts" />
         <Contacts
-              contacts={this.state.contacts}
-              searchContactFunc= {this.handleChange}
+              contacts={contactFiltering()}
+              searchContactFunc= {handleChange}
             />
     </div>
   );
