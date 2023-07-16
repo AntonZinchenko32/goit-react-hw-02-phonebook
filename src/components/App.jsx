@@ -32,7 +32,6 @@ export class App extends Component {
         id: nanoid(), name, number
       }),
     }));
-
     
     form.reset();
   };
