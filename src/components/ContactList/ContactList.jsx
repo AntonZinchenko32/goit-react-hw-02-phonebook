@@ -1,39 +1,19 @@
 import css from './ContactList.module.css'
-import PropTypes from "prop-types"
-import Notification from "components/Notification/Notification";
+
+import ContactItem from 'components/ContactItem/ContactItem';
 
 
-const Contacts = ({contacts, searchContactFunc}) => {
+const ContactList = ({contacts}) => {
     
     return (
         <>  
-            <span className={css.label}>Find contacts by name</span>
-            <input
-                className={css.input}
-                onChange={searchContactFunc}
-            />
-            {contacts.length !== 0 ?
-                <ul className={css.contactsList}>
-                {contacts.map(({ name, id, number }) => (
-                    <li key={id}>{name}: {number}</li>
-                ))}
-                </ul>
-                :
-                <Notification message="No contacts added at all or none that meet the search criteria" />
-            }
-            
+            <ul className={css.contactsList}>
+                <ContactItem contacts={contacts} />
+            </ul>
         </>
-
     )
 }
 
-Contacts.propTypes = {
-    contacts: PropTypes.arrayOf(PropTypes.exact({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        number: PropTypes.string.isRequired
-    }))
-}
 
-export default Contacts;
+export default ContactList;
 

@@ -1,8 +1,15 @@
 import css from './Filter.module.css'
-import PropTypes from 'prop-types'
 
-const Filter = ({ }) => {
-    
+const Filter = ({ searchContactFunc }) => {
+    return (
+        <>
+            <span className={css.label}>Find contacts by name</span>
+                <input
+                    className={css.input}
+                    onChange={searchContactFunc}
+                />
+        </>
+    )
 }
 
 export default Filter;

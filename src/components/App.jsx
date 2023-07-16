@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { nanoid } from 'nanoid'
 
-import Section from './Section/Section'
-import Form from './ContactForm/ContactForm'
-import Contacts from './ContactList/ContactList'
+
+import ContactForm from './ContactForm/ContactForm'
+import Filter from './Filter/Filter'
+import ContactList from './ContactList/ContactList'
 
 
 export class App extends Component {
@@ -34,6 +35,7 @@ export class App extends Component {
       }),
     }));
 
+    
     form.reset();
   };
 
@@ -81,15 +83,23 @@ export class App extends Component {
         color: '#010101'
       }}
     >
-        <>
-          <Section title="Phonebook" />
-          <Form addContactFunc={handleSubmit} />
-        </>
-        <Section title="Contacts" />
-        <Contacts
-              contacts={contactFiltering()}
-              searchContactFunc= {handleChange}
-            />
+        <h1
+          style={{
+            margin: '15px 0',
+            fontSize: '42px'
+        }}
+        >Phonebook</h1>
+        <ContactForm addContactFunc={handleSubmit} />
+    
+        <h1
+        style={{
+          margin: '15px 0',
+          fontSize: '42px'
+        }}
+        >Contacts</h1>
+
+        <Filter searchContactFunc= {handleChange} />
+        <ContactList contacts={contactFiltering()}  />
     </div>
   );
   }

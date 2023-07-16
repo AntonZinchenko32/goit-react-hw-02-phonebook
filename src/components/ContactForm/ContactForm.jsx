@@ -3,7 +3,7 @@ import css from './ContactForm.module.css'
 
 
 
-export default class Form extends Component {
+export default class ContactForm extends Component {
     
     render() {
         
