@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { Component } from "react";
 import css from './ContactForm.module.css'
 
@@ -5,23 +6,28 @@ import css from './ContactForm.module.css'
 
 export default class ContactForm extends Component {
 
-    state = {
-        name: '',
-        number: ''
-    }
+    // state = {
+    //     name: '',
+    //     number: ''
+    // }
+
+    nameInputId = nanoid();
+    numberInputId = nanoid();
     
     render() {
         
         const { form, inputStyled, submitButton } = css;
+        const { props, nameInputId, numberInputId } = this;
 
     
     return (
         <form
             className={form}
-            onSubmit={this.props.addContactFunc}
+            onSubmit={props.addContactFunc}
         >
-            <span>Name</span>
+            <label htmlFor={nameInputId}>Name</label>
             <input
+                id={nameInputId}
                 className={inputStyled}
                 type="text"
                 name="name"
@@ -29,8 +35,9 @@ export default class ContactForm extends Component {
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
             />
-            <span>Number</span>
+            <label htmlFor={numberInputId}>Number</label>
             <input
+                id={numberInputId}
                 className={inputStyled}
                 type="tel"
                 name="number"

@@ -14,6 +14,7 @@ export class App extends Component {
     filter: ''
   }
   
+  
   // Функція-обробник сабміту
   handleSubmit = evt => {
     
@@ -32,6 +33,7 @@ export class App extends Component {
         id: nanoid(), name, number
       }),
     }));
+
     
     form.reset();
   };
@@ -64,7 +66,7 @@ export class App extends Component {
     
   
   render() {
-
+    
     const { handleSubmit, handleChange, contactFiltering } = this;
 
     return (

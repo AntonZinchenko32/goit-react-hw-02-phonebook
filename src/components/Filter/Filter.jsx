@@ -1,13 +1,18 @@
 import css from './Filter.module.css'
+import { nanoid } from "nanoid"
 
 const Filter = ({ searchContactFunc }) => {
+
+    const filterInputId = nanoid();
+
     return (
         <>
-            <span className={css.label}>Find contacts by name</span>
-                <input
-                    className={css.input}
-                    onChange={searchContactFunc}
-                />
+            <label htmlFor={filterInputId} className={css.label}>Find contacts by name</label>
+            <input
+                id={filterInputId}
+                className={css.input}
+                onChange={searchContactFunc}
+            />
         </>
     )
 }
