@@ -6,10 +6,10 @@ import css from './ContactForm.module.css'
 
 export default class ContactForm extends Component {
 
-    // state = {
-    //     name: '',
-    //     number: ''
-    // }
+    state = {
+        name: '',
+        number: ''
+    }
 
     nameInputId = nanoid();
     numberInputId = nanoid();
