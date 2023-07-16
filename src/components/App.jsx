@@ -10,7 +10,12 @@ import ContactList from './ContactList/ContactList'
 export class App extends Component {
 
   state = {
-    contacts: [],
+    contacts: [
+      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+      {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'}
+    ],
     filter: ''
   }
   
@@ -21,21 +26,32 @@ export class App extends Component {
     evt.preventDefault();
     
     const form = evt.currentTarget;
-    
-    // Зберігаємо дані з інпутів у стан компонента
     const { name, number } = form.elements;
-    this.setState({ name: name.value, number: number.value })
     
     
-    // Асинхронно додаэмо новий контакт до масиву контактів в стані додатку
+    // Перевіряємо чи є співпадіння імені серед доданих контактів і імені, що користувач хоче додати
+    const gotMatch = this.state.contacts.find(contact => {
+      return contact.name === name.value
+    });
+
+    
+    if (!gotMatch) {
+      
+      // Зберігаємо дані з інпутів у стан компонента
+      this.setState({ name: name.value, number: number.value })
+      
+      // Асинхронно додаэмо новий контакт до масиву контактів в стані додатку
     this.setState(({contacts, name, number}) => ({
       contacts: contacts.concat({
         id: nanoid(), name, number
       }),
     }));
+      form.reset();
+    }
 
-    
-    form.reset();
+    else {
+      alert(`${name.value} already in list`);
+    }
   };
 
   // Функція що передає дані з інпуту до стану компонента
