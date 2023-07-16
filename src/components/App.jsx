@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { nanoid } from 'nanoid'
 
 import Section from './Section/Section'
-import Form from './Form/Form'
-import Contacts from './Contacts/Contacts'
+import Form from './ContactForm/ContactForm'
+import Contacts from './ContactList/ContactList'
 
 
 export class App extends Component {

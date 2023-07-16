@@ -1,4 +1,4 @@
-import css from './Contacts.module.css'
+import css from './ContactList.module.css'
 import PropTypes from "prop-types"
 import Notification from "components/Notification/Notification";
 
