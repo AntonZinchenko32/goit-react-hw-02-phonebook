@@ -24,7 +24,7 @@ export default class ContactForm extends Component {
     render() {
         
         const { form, inputStyled, submitButton } = css;
-        const { props, nameInputId, numberInputId } = this;
+        const { props, nameInputId, numberInputId, handleChange } = this;
 
     
     return (
@@ -35,7 +35,7 @@ export default class ContactForm extends Component {
             <label htmlFor={nameInputId}>Name</label>
             <input
                 id={nameInputId}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 className={inputStyled}
                 type="text"
                 name="name"
@@ -46,7 +46,7 @@ export default class ContactForm extends Component {
             <label htmlFor={numberInputId}>Number</label>
             <input
                 id={numberInputId}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 className={inputStyled}
                 type="tel"
                 name="number"
