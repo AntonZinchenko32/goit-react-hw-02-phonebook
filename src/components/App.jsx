@@ -20,7 +20,7 @@ export class App extends Component {
   }
   
   
-  // Функція-обробник сабміту
+  // Додавання контактів із забороною на додавання з однаковими іменами
   handleSubmit = evt => {
     
     evt.preventDefault();
@@ -54,12 +54,10 @@ export class App extends Component {
     }
   };
 
-  // Функція що передає дані з інпуту до стану компонента filter
+  // Фільтрація контактів
   handleChange = evt => {
     this.setState({ filter: evt.target.value });
   }
-
-  // Функція фільтрації контактів
   contactFiltering = () => {
 
     const { filter, contacts } = this.state;
@@ -79,7 +77,8 @@ export class App extends Component {
       }
     }
   }
-    
+  
+  // Видалення контактів
   deleteContact = id => {
     
       this.setState(state => ({
