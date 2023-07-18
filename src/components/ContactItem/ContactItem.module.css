@@ -1,3 +1,13 @@
 .contactItem:not(:last-child) {
+    
     margin-bottom: 10px;
+}
+
+.contactItem {
+    display: flex;
+    align-items: center;
+}
+
+.deleteButton {
+    margin-left: 15px;
 }

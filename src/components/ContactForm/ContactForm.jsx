@@ -13,6 +13,13 @@ export default class ContactForm extends Component {
 
     nameInputId = nanoid();
     numberInputId = nanoid();
+
+
+    handleChange = evt => {
+        this.setState({ name: evt.target.value });
+        this.setState({ number: evt.target.value });
+    }
+    
     
     render() {
         
@@ -28,6 +35,7 @@ export default class ContactForm extends Component {
             <label htmlFor={nameInputId}>Name</label>
             <input
                 id={nameInputId}
+                onChange={this.handleChange}
                 className={inputStyled}
                 type="text"
                 name="name"
@@ -38,6 +46,7 @@ export default class ContactForm extends Component {
             <label htmlFor={numberInputId}>Number</label>
             <input
                 id={numberInputId}
+                onChange={this.handleChange}
                 className={inputStyled}
                 type="tel"
                 name="number"

@@ -1,14 +1,23 @@
+import React, { Component } from "react";
 import css from './ContactItem.module.css'
 import PropTypes from "prop-types"
 
-const ContactItem = ({ contacts }) => {
+export default class ContactItem extends Component {
     
-    return (
-        contacts.map(({ name, id, number }) => (
-                    <li className={css.contactItem} key={id}>{name}: {number}</li>
-                ))
-    ) 
+    render() {
+
+        const {contacts, deleteContactFunc} = this.props
+
+        return (
+            contacts.map(({ name, id, number }) => (
+                <li className={css.contactItem} key={id}>{name}: {number}
+                    <button className={css.deleteButton} onClick={() => deleteContactFunc (id)}>Delete</button>
+                </li>
+            ))
+        )
+    }
 }
+
 
 ContactItem.propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.exact({
@@ -18,4 +27,3 @@ ContactItem.propTypes = {
     }))
 }
 
-export default ContactItem;

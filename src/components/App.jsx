@@ -54,7 +54,7 @@ export class App extends Component {
     }
   };
 
-  // Функція що передає дані з інпуту до стану компонента
+  // Функція що передає дані з інпуту до стану компонента filter
   handleChange = evt => {
     this.setState({ filter: evt.target.value });
   }
@@ -80,10 +80,18 @@ export class App extends Component {
     }
   }
     
+  deleteContact = id => {
+    
+      this.setState(state => ({
+        contacts: state.contacts.filter(contact => {
+          return contact.id !== id;
+      })
+    }));
+  }
   
   render() {
     
-    const { handleSubmit, handleChange, contactFiltering } = this;
+    const { handleSubmit, handleChange, contactFiltering, deleteContact } = this;
 
     return (
     <div
@@ -114,7 +122,10 @@ export class App extends Component {
         >Contacts</h1>
 
         <Filter searchContactFunc= {handleChange} />
-        <ContactList contacts={contactFiltering()}  />
+        <ContactList
+          contacts={contactFiltering()}
+          deleteContactFunc = {deleteContact}
+        />
     </div>
   );
   }
