@@ -15,13 +15,25 @@ export default class ContactForm extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   };
 
+  handleSubmit = evt => {
+    evt.preventDefault();
+
+    const form = evt.currentTarget;
+
+    this.props.addContactFunc(this.state);
+
+    this.setState({ name: '', number: '' });
+
+    form.reset();
+  };
+
   render() {
     const { form, inputStyled, submitButton } = css;
-    const { props, nameInputId, numberInputId, handleChange } = this;
+    const { nameInputId, numberInputId, handleChange } = this;
     const { name, number } = this.state;
 
     return (
-      <form className={form} onSubmit={props.addContactFunc}>
+      <form className={form} onSubmit={this.handleSubmit}>
         <label htmlFor={nameInputId}>Name</label>
         <input
           id={nameInputId}

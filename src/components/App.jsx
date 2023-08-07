@@ -1,126 +1,110 @@
-import React, { Component } from "react";
-import { nanoid } from 'nanoid'
+import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 
-
-import ContactForm from './ContactForm/ContactForm'
-import Filter from './Filter/Filter'
-import ContactList from './ContactList/ContactList'
-
+import ContactForm from './ContactForm/ContactForm';
+import Filter from './Filter/Filter';
+import ContactList from './ContactList/ContactList';
 
 export class App extends Component {
-
   state = {
     contacts: [],
-    filter: ''
-  }
-  
-  
+    filter: '',
+  };
+
   // Додавання контактів із забороною на додавання з однаковими іменами ***************************************************
-  handleSubmit = evt => {
-    
-    evt.preventDefault();
-    
-    const form = evt.currentTarget;
-    const { name, number } = form.elements;
-    
-    
+  addContactFunc = newContact => {
+    const { name, number } = newContact;
+
     // Перевіряємо чи є співпадіння імені серед доданих контактів і імені, що користувач хоче додати
     const gotMatch = this.state.contacts.find(contact => {
-      return contact.name === name.value
+      return contact.name === name;
     });
 
-    
     if (!gotMatch) {
-      
-      // Зберігаємо дані з інпутів у стан компонента
-      this.setState({ name: name.value, number: number.value })
-      
       // Асинхронно додаэмо новий контакт до масиву контактів в стані додатку
-    this.setState(({contacts, name, number}) => ({
-      contacts: contacts.concat({
-        id: nanoid(), name, number
-      }),
-    }));
-      form.reset();
-    }
-
-    else {
-      alert(`${name.value} already in list`);
+      this.setState(({ contacts }) => ({
+        contacts: contacts.concat({
+          id: nanoid(),
+          name,
+          number,
+        }),
+      }));
+    } else {
+      alert(`${name} already in list`);
     }
   };
 
   // Фільтрація контактів ***********************************************************************************************
-  handleChange = evt => {
+  handleFilter = evt => {
     this.setState({ filter: evt.target.value });
-  }
+  };
   contactFiltering = () => {
-
     const { filter, contacts } = this.state;
 
     if (filter === '') return contacts;
-    
     else {
-
       const filtredContacts = contacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
-      )
+      );
       if (filtredContacts !== []) {
         return filtredContacts;
-      }
-      else {
+      } else {
         return contacts;
       }
     }
-  }
-  
+  };
+
   // Видалення контактів *************************************************************************************************
   deleteContact = id => {
-    
-      this.setState(state => ({
-        contacts: state.contacts.filter(contact => {
-          return contact.id !== id;
-      })
+    this.setState(state => ({
+      contacts: state.contacts.filter(contact => {
+        return contact.id !== id;
+      }),
     }));
-  }
-  
+  };
+
   render() {
-    
-    const { handleSubmit, handleChange, contactFiltering, deleteContact } = this;
+    const { addContactFunc, handleFilter, contactFiltering, deleteContact } =
+      this;
 
     return (
-    <div
+      <div
         style={{
-        margin: '15px',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'start',
-        alignItems: 'start',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
+          margin: '15px',
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'start',
+          alignItems: 'start',
+          fontSize: 40,
+          color: '#010101',
+        }}
+      >
         <h1
           style={{
             margin: '15px 0',
-            fontSize: '42px'
-        }}
-        >Phonebook</h1>
-        <ContactForm addContactFunc={handleSubmit} />
-    
-        <h1
-        style={{
-          margin: '15px 0',
-          fontSize: '42px'
-        }}
-        >Contacts</h1>
+            fontSize: '42px',
+          }}
+        >
+          Phonebook
+        </h1>
+        <ContactForm addContactFunc={addContactFunc} />
 
-        <Filter searchContactFunc= {handleChange} />
+        <h1
+          style={{
+            margin: '15px 0',
+            fontSize: '42px',
+          }}
+        >
+          Contacts
+        </h1>
+
+        <Filter searchContactFunc={handleFilter} />
         <ContactList
           contacts={contactFiltering()}
-          deleteContactFunc = {deleteContact}
+          deleteContactFunc={deleteContact}
         />
-    </div>
-  );
+      </div>
+    );
   }
-};
+}
